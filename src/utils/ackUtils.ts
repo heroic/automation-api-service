@@ -87,6 +87,10 @@ export function shouldAddContext() {
 	if (!version) {
 		return false;
 	}
+	// Logistics 1.2.0 ACK/NACK schemas allow message/error only.
+	if (process.env.DOMAIN === "nic2004:60232" && version === "1.2.0") {
+		return false;
+	}
 	const major = parseInt(version.split(".")[0]);
 	logger.info(
 		`Version: ${version}, Major Value: ${major},thus context in ack is : ${major > 1}`
